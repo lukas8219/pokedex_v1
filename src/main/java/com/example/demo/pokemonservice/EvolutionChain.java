@@ -1,49 +1,37 @@
 package com.example.demo.pokemonservice;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+@JsonDeserialize(using = evolutionDeserialize.class)
 public class EvolutionChain {
 
-	private Object baby_trigger_item;
-	private Chain chain;
-	private int id;
 	
-	public EvolutionChain(@JsonProperty("baby_trigger_item") Object item, @JsonProperty("chain") Chain chain
-			,@JsonProperty("id") int id) {
-		this.baby_trigger_item = item;
-		this.chain = chain;
-		this.id = id;
+	private List<Pokemon> evolution_chain;
+	private int chain_id;
+	
+	public EvolutionChain() {
+		this.evolution_chain = new ArrayList<>();
+		this.chain_id = 0;
 	}
 	
-	@JsonProperty("baby_trigger_item")
-	public Object getBaby_trigger_item() {
-		return baby_trigger_item;
+	public List<Pokemon> getEvolution_chain() {
+		return evolution_chain;
 	}
-
-	public void setBaby_trigger_item(Object baby_trigger_item) {
-		this.baby_trigger_item = baby_trigger_item;
+	public void setEvolution_chain(List<Pokemon> evolution_chain) {
+		this.evolution_chain = evolution_chain;
 	}
-	@JsonProperty("chain")
-	public Chain getChain() {
-		return chain;
+	public int getChain_id() {
+		return chain_id;
 	}
-
-	public void setChain(Chain chain) {
-		this.chain = chain;
+	public void setChain_id(int chain_id) {
+		this.chain_id = chain_id;
 	}
 	
-	@JsonProperty("id")
-	public int getId() {
-		return id;
+	public void insertEvolution(Pokemon p) {
+		this.evolution_chain.add(p);
 	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 }
